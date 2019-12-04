@@ -137,6 +137,7 @@ class TaskView {
     }
 
     render(baseURL) {
+        // TODO task list html 
         this._UI = $(`<div tid=${this._task.id} class="dashboardItem"> </div>`).append(
             $(`<center class="dashboardTitleWrapper">
                 <label class="semiBold h1 selectable"> ${this._task.name} </label>
@@ -313,6 +314,8 @@ class DashboardView {
                 }));
 
                 for (const task of tasks) {
+                    //TODO task list 
+
                     const taskView = new TaskView(task,
                         this._annotationFormats, this._exportFormats);
                     dashboardList.append(taskView.render(baseURL));
@@ -737,6 +740,7 @@ class DashboardView {
             }
 
             try {
+                // TODO create task request event
                 let task = new window.cvat.classes.Task(description);
                 if (source === 'local') {
                     task.clientFiles = Array.from(files);

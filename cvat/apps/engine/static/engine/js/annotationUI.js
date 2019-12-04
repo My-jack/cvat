@@ -386,7 +386,7 @@ function setupMenu(job, task, shapeCollectionModel,
 
     $('#settingsButton').attr('title', `
         ${shortkeys.open_settings.view_value} - ${shortkeys.open_settings.description}`);
-
+    // TODO download button is here 
     const downloadButton = $('#downloadAnnotationButton');
     const uploadButton = $('#uploadAnnotationButton');
 
@@ -411,6 +411,7 @@ function setupMenu(job, task, shapeCollectionModel,
 
     downloadButton.on('change', async (e) => {
         const dumper = e.target.value;
+        //TODO dumper is what? maybe is a number or index.
         downloadButton.prop('value', 'Dump Annotation');
         try {
             downloadButton.prop('disabled', true);
@@ -480,6 +481,8 @@ function setupMenu(job, task, shapeCollectionModel,
 function buildAnnotationUI(jobData, taskData, imageMetaData, annotationData, annotationFormats,
     loadJobEvent) {
     // Setup some API
+
+    //TODO  annotationFormats is download sourceData
     window.cvat = {
         labelsInfo: new LabelsInfo(taskData.labels),
         translate: new CoordinateTranslator(),
@@ -694,11 +697,14 @@ function callAnnotationUI(jid) {
     const loadJobEvent = Logger.addContinuedEvent(Logger.EventType.loadJob);
     $.get(`/api/v1/jobs/${jid}`).done((jobData) => {
         $.when(
+            //TODO 
             $.get(`/api/v1/tasks/${jobData.task_id}`),
             $.get(`/api/v1/tasks/${jobData.task_id}/frames/meta`),
             $.get(`/api/v1/jobs/${jid}/annotations`),
             $.get('/api/v1/server/annotation/formats'),
         ).then((taskData, imageMetaData, annotationData, annotationFormats) => {
+            //TODO 
+            console.log(buildAnnotationUI)
             $('#loadingOverlay').remove();
             setTimeout(() => {
                 buildAnnotationUI(jobData, taskData[0],
