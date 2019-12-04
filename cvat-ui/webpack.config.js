@@ -12,7 +12,10 @@ module.exports = {
     target: 'web',
     mode: 'production',
     devtool: 'source-map',
-    entry: './src/index.tsx',
+    entry:[
+        'react-hot-loader/patch',
+        require.resolve('./src/index.tsx'),
+    ],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'cvat-ui.min.js',
@@ -21,8 +24,16 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         compress: false,
         inline: true,
-        port: 3000,
+        port: 7000,
+        host: '0.0.0.0',
         historyApiFallback: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8081',
+                secure: false,
+                changeOrigin: true
+            }
+          }
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
@@ -36,7 +47,8 @@ module.exports = {
                 options: {
                     plugins: ['@babel/plugin-proposal-class-properties', ['import', {
                         'libraryName': 'antd',
-                    }]],
+                    }],
+                    'react-hot-loader/babel'],
                     presets: [
                         ['@babel/preset-env', {
                             targets: {

@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
 
+// 引入热更新
+import { AppContainer } from 'react-hot-loader';
+
+
 import CVATApplication from './components/cvat-app';
 
 import createRootReducer from './reducers/root-reducer';
@@ -113,9 +117,15 @@ const ReduxAppWrapper = connect(
 
 ReactDOM.render(
     (
-        <Provider store={cvatStore}>
+        
+    <Provider store={cvatStore}>
+        <AppContainer>
             <ReduxAppWrapper/>
-        </Provider>
+        </AppContainer>
+    </Provider>
     ),
     document.getElementById('root')
 )
+if (module.hot) {
+    module.hot.accept();
+}

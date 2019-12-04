@@ -9,7 +9,7 @@ const host = typeof (process.env.REACT_APP_API_HOST) === 'undefined'
 const port = typeof (process.env.REACT_APP_API_PORT) === 'undefined'
     ? '7000' : process.env.REACT_APP_API_PORT;
 
-cvat.config.backendAPI = `${protocol}://${host}:${port}/api/v1`;
+cvat.config.backendAPI = `/api/v1`;
 
 export default function getCore(): any {
     return cvat;
