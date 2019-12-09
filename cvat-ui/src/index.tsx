@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
 
-// 引入热更新
+// 引入热更�
 import { AppContainer } from 'react-hot-loader';
 
 
@@ -23,7 +23,7 @@ import {
 import {
     CombinedState,
     NotificationsState,
- } from './reducers/interfaces';
+} from './reducers/interfaces';
 
 createCVATStore(createRootReducer);
 const cvatStore = getCVATStore();
@@ -69,7 +69,7 @@ function mapStateToProps(state: CombinedState): StateToProps {
         installedAutoAnnotation: plugins.plugins.AUTO_ANNOTATION,
         installedTFSegmentation: plugins.plugins.TF_SEGMENTATION,
         installedTFAnnotation: plugins.plugins.TF_ANNOTATION,
-        notifications: {...state.notifications},
+        notifications: { ...state.notifications },
         user: auth.user,
     };
 }
@@ -85,29 +85,10 @@ function mapDispatchToProps(dispatch: any): DispatchToProps {
     };
 }
 
-function reduxAppWrapper(props: StateToProps & DispatchToProps) {
+function reduxAppWrapper(props: StateToProps & DispatchToProps): JSX.Element {
     return (
-        <CVATApplication
-            initPlugins={props.initPlugins}
-            loadFormats={props.loadFormats}
-            loadUsers={props.loadUsers}
-            verifyAuthorized={props.verifyAuthorized}
-            resetErrors={props.resetErrors}
-            resetMessages={props.resetMessages}
-            userInitialized={props.userInitialized}
-            pluginsInitialized={props.pluginsInitialized}
-            pluginsFetching={props.pluginsFetching}
-            usersInitialized={props.usersInitialized}
-            usersFetching={props.usersFetching}
-            formatsInitialized={props.formatsInitialized}
-            formatsFetching={props.formatsFetching}
-            installedAutoAnnotation={props.installedAutoAnnotation}
-            installedTFSegmentation={props.installedTFSegmentation}
-            installedTFAnnotation={props.installedTFAnnotation}
-            notifications={props.notifications}
-            user={props.user}
-        />
-    )
+        <CVATApplication {...props} />
+    );
 }
 
 const ReduxAppWrapper = connect(
@@ -120,12 +101,12 @@ ReactDOM.render(
         
     <Provider store={cvatStore}>
         <AppContainer>
-            <ReduxAppWrapper/>
+            <ReduxAppWrapper />
         </AppContainer>
     </Provider>
     ),
-    document.getElementById('root')
-)
+    document.getElementById('root'),
+);
 if (module.hot) {
     module.hot.accept();
 }
